@@ -69,18 +69,31 @@ public class DeckController : MonoBehaviour
         {
             clickDetector.OnCartaClicked += OnCartaClicked;
         }
+
+        foreach (GameObject carta2 in cardPrefabs2)
+        {
+            ClickDetector clickDetector = carta2.GetComponent<ClickDetector>();
+            if (clickDetector != null)
+            {
+                listaClickDetectors.Add(clickDetector);
+            }
+        }
+        foreach (ClickDetector clickDetector in listaClickDetectors)
+        {
+            clickDetector.OnCartaClicked += OnCartaClicked;
+        }
     }
 
     private void OnCartaClicked(ClickDetector clickDetector)
     {
         //List<GameObject> cartasJugadorActual = GetCartasJugador(turnoActual);
 
-        Debug.Log("Se hizo click en la carta: " + clickDetector.name);
+        //Debug.Log("Se hizo click en la carta: " + clickDetector.name);
 
         Sprite SpriteCartaSelec = clickDetector.GetComponent<SpriteRenderer>().sprite;
 
-        //if (cartasJugadorActual.Contains(clickDetector.GetComponent<SpriteRenderer>().sprite))
-        //{
+        if (jugador1.Contains(clickDetector.GetComponent<SpriteRenderer>().sprite))
+        {
             // Aquí puedes hacer lo que necesites con la carta que se hizo click
             if (clickDetector != null)
         {
@@ -90,12 +103,29 @@ public class DeckController : MonoBehaviour
         // Borrar la carta seleccionada de la mano del jugador
         jugador1.Remove(SpriteCartaSelec);
          clickDetector.GetComponent<SpriteRenderer>().sprite = null;
-
-
             }
-        AvanzarTurno();
-        // }
+            AvanzarTurno();
+        }
+        if (jugador2.Contains(clickDetector.GetComponent<SpriteRenderer>().sprite))
+        {
+            // Aquí puedes hacer lo que necesites con la carta que se hizo click
+            if (clickDetector != null)
+            {
+
+                // clickDetector.Invoke(gameObject);
+                // Agregar la carta seleccionada a la lista de cartas del medio
+                cartasMedio.Add(SpriteCartaSelec);
+                // Borrar la carta seleccionada de la mano del jugador
+                jugador1.Remove(SpriteCartaSelec);
+                clickDetector.GetComponent<SpriteRenderer>().sprite = null;
+            }
+            AvanzarTurno();
+        }
+
     }
+   
+        
+          
 
     private void AvanzarTurno()
     {
@@ -268,23 +298,22 @@ void Update()
         {
             // Es el turno de un bot, selecciona una carta aleatoria
             List<Sprite> cartasJugadorActual = GetJugadorActual(turnoActual);
+            List<GameObject> PoscartasJugadorActual = GetCartasJugador(turnoActual);
 
             //Si la carta del medio es un 4 ...
-           if (cartasMedio[cartasMedio.Count - 1].name == "bastos4" | cartasMedio[cartasMedio.Count - 1].name == "oros4" | cartasMedio[cartasMedio.Count - 1].name == "copas4" | cartasMedio[cartasMedio.Count - 1].name == "espadas4")
+            if (cartasMedio[cartasMedio.Count - 1].name == "bastos4" | cartasMedio[cartasMedio.Count - 1].name == "oros4" | cartasMedio[cartasMedio.Count - 1].name == "copas4" | cartasMedio[cartasMedio.Count - 1].name == "espadas4")
            {
              
             //Debug.Log("Carta1: " + cartasJugadorActual[0].name + "Carta2: " + cartasJugadorActual[1].name + "Carta3: " + cartasJugadorActual[2].name);
            
             }
 
-            int indiceCartaSeleccionada = Random.Range(0, 3);
-           GameObject cartaSeleccionada = cardPrefabs2[indiceCartaSeleccionada];
-           Debug.Log(cardPrefabs2[indiceCartaSeleccionada].name);
+       
+            //De momento selecciona una carta random de las 3 que tiene en la mano y hace click encima de una para que entre en la funcion ClickDetector y ponga la carta en el medio
+            int indiceCartaSeleccionada = Random.Range(0, 3);          
+            GameObject cartaSeleccionada = PoscartasJugadorActual[indiceCartaSeleccionada];
             cartaSeleccionada.GetComponent<ClickDetector>().OnMouseDown();
 
-            //int indiceCartaSeleccionada = Random.Range(0, cartasJugadorActual.Count);
-            //GameObject cartaSeleccionada = cartasJugadorActual[indiceCartaSeleccionada];
-            //cartaSeleccionada.GetComponent<ClickSelector>().OnMouseDown();
         }
         else if (turnoActual == 3)
         {
