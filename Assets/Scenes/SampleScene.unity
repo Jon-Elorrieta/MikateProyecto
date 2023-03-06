@@ -843,6 +843,7 @@ MonoBehaviour:
   jugador4: []
   cartasSobrantes: []
   cartasMedio: []
+  cartasMano: []
 --- !u!61 &165654319
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1081,16 +1082,6 @@ MonoBehaviour:
   - {fileID: 1812057875}
   - {fileID: 564651312}
   cardPrefabs2:
-  - {fileID: 885664788}
-  - {fileID: 164599340}
-  - {fileID: 795228893}
-  - {fileID: 683168603}
-  - {fileID: 430216066}
-  - {fileID: 1367277115}
-  - {fileID: 57709860}
-  - {fileID: 1587410435}
-  - {fileID: 670957043}
-  cardPrefabs3:
   - {fileID: 1797383461}
   - {fileID: 83742757}
   - {fileID: 1501627722}
@@ -1100,6 +1091,16 @@ MonoBehaviour:
   - {fileID: 1641653533}
   - {fileID: 1819904072}
   - {fileID: 1843713556}
+  cardPrefabs3:
+  - {fileID: 885664788}
+  - {fileID: 164599340}
+  - {fileID: 795228893}
+  - {fileID: 683168603}
+  - {fileID: 430216066}
+  - {fileID: 1367277115}
+  - {fileID: 57709860}
+  - {fileID: 1587410435}
+  - {fileID: 670957043}
   cardPrefabs4:
   - {fileID: 343641472}
   - {fileID: 2094611099}
@@ -1163,6 +1164,7 @@ MonoBehaviour:
   jugador4: []
   cartasSobrantes: []
   cartasMedio: []
+  cartasMano: []
 --- !u!4 &241251114
 Transform:
   m_ObjectHideFlags: 0
@@ -1794,6 +1796,7 @@ MonoBehaviour:
   jugador4: []
   cartasSobrantes: []
   cartasMedio: []
+  cartasMano: []
 --- !u!212 &343641474
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3098,6 +3101,7 @@ MonoBehaviour:
   jugador4: []
   cartasSobrantes: []
   cartasMedio: []
+  cartasMano: []
 --- !u!212 &885664790
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4694,6 +4698,7 @@ MonoBehaviour:
   jugador4: []
   cartasSobrantes: []
   cartasMedio: []
+  cartasMano: []
 --- !u!212 &1797383463
 SpriteRenderer:
   m_ObjectHideFlags: 0
