@@ -837,6 +837,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e674ba61b124c354c99a977e419e7ba1, type: 3}
   spriteR: {fileID: 165654315}
   selectedIndices: 
+  selectedIndicesTodas: 
   jugador1: []
   jugador2: []
   jugador3: []
@@ -844,6 +845,7 @@ MonoBehaviour:
   cartasSobrantes: []
   cartasMedio: []
   cartasMano: []
+  listaNumerosCartas: 
 --- !u!61 &165654319
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1158,6 +1160,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d3363dbd858d46040b8bc6c90b43a0be, type: 3}
   spriteR: {fileID: 0}
   selectedIndices: 
+  selectedIndicesTodas: 
   jugador1: []
   jugador2: []
   jugador3: []
@@ -1165,6 +1168,7 @@ MonoBehaviour:
   cartasSobrantes: []
   cartasMedio: []
   cartasMano: []
+  listaNumerosCartas: 
 --- !u!4 &241251114
 Transform:
   m_ObjectHideFlags: 0
@@ -1790,6 +1794,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e674ba61b124c354c99a977e419e7ba1, type: 3}
   spriteR: {fileID: 343641474}
   selectedIndices: 
+  selectedIndicesTodas: 
   jugador1: []
   jugador2: []
   jugador3: []
@@ -1797,6 +1802,7 @@ MonoBehaviour:
   cartasSobrantes: []
   cartasMedio: []
   cartasMano: []
+  listaNumerosCartas: 
 --- !u!212 &343641474
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3045,8 +3051,8 @@ GameObject:
   - component: {fileID: 885664791}
   - component: {fileID: 885664790}
   - component: {fileID: 885664789}
-  - component: {fileID: 885664793}
   - component: {fileID: 885664792}
+  - component: {fileID: 885664793}
   m_Layer: 0
   m_Name: CartaMano1.2
   m_TagString: Untagged
@@ -3095,6 +3101,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e674ba61b124c354c99a977e419e7ba1, type: 3}
   spriteR: {fileID: 885664790}
   selectedIndices: 
+  selectedIndicesTodas: 
   jugador1: []
   jugador2: []
   jugador3: []
@@ -3102,6 +3109,7 @@ MonoBehaviour:
   cartasSobrantes: []
   cartasMedio: []
   cartasMano: []
+  listaNumerosCartas: 
 --- !u!212 &885664790
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4692,6 +4700,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e674ba61b124c354c99a977e419e7ba1, type: 3}
   spriteR: {fileID: 1797383463}
   selectedIndices: 
+  selectedIndicesTodas: 
   jugador1: []
   jugador2: []
   jugador3: []
@@ -4699,6 +4708,7 @@ MonoBehaviour:
   cartasSobrantes: []
   cartasMedio: []
   cartasMano: []
+  listaNumerosCartas: 
 --- !u!212 &1797383463
 SpriteRenderer:
   m_ObjectHideFlags: 0

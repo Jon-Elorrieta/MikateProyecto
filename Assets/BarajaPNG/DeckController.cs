@@ -51,7 +51,7 @@ public class DeckController : MonoBehaviour
 void Start()
     {
 
-
+        DisableBotCardsClickDetection();
         RellenarCartasYJugadores();
         SelectCartasSobrantes();
       
@@ -61,7 +61,19 @@ void Start()
 
     }
 
-    void CapturarClick()
+    void DisableBotCardsClickDetection()
+    {
+        //No funciona , hay que corregir esto.
+        cardPrefabs[0].GetComponent<ClickDetector>().enabled = false;
+        cardPrefabs[1].GetComponent<ClickDetector>().enabled = false;
+        cardPrefabs[2].GetComponent<ClickDetector>().enabled = false;
+
+        cardPrefabs2[0].GetComponent<ClickDetector>().enabled = false;
+        cardPrefabs2[1].GetComponent<ClickDetector>().enabled = false;
+        cardPrefabs2[2].GetComponent<ClickDetector>().enabled = false;
+
+    }
+        void CapturarClick()
     {
         foreach (GameObject carta in cardPrefabs)
         {
@@ -385,6 +397,10 @@ void Start()
             default: return "no coincide con ninguna carta"; // En caso de que el nombre del Sprite no coincida con ninguna carta
         }
     }
+
+
+   
+
     public int C1(int numeroCartaMedio, Sprite a, Sprite b, Sprite c)
     {
         int CartaMano1 = ObtenerNumeroCarta(a);
@@ -393,9 +409,8 @@ void Start()
         bool cond = true;
         int TotCartas = cartasMedio.Count - 1;
 
-        //Comparamos si la carta de la mano es el mismo numero pero de diferente palo
-        //Bastos
-   
+        //Comparamos si la carta de la mano es el mismo numero pero de diferente palo y tira esa carta
+        //Bastos 
         {
         if (numeroCartaMedio <= 10){
 
@@ -570,7 +585,700 @@ void Start()
                 return CartaMano3;
             }
         }
-           
+
+
+            //Validamos si el numero del medio es un 1,2,3,4 ... y le decimos que tirar al bot
+            //Bastos1 = 1 , Oros1 = 11, Copas1 = 21, Espadas1 = 31. Lo mismo con el resto de palos.
+            //Bastos2 = 2 , Oros2 = 12, Copas2 = 22, Espadas2 = 32...
+            if (numeroCartaMedio == 1 || numeroCartaMedio == 11 || numeroCartaMedio == 21 || numeroCartaMedio == 31)
+            {
+                if (CartaMano1 == 2 || CartaMano1 == 12 || CartaMano1 == 22 || CartaMano1 == 32)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 3 || CartaMano1 == 13 || CartaMano1 == 23 || CartaMano1 == 33)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 8 || CartaMano1 == 18 || CartaMano1 == 28 || CartaMano1 == 38)
+                {
+                    return CartaMano1;
+                }
+
+
+                if (CartaMano2 == 2 || CartaMano2 == 12 || CartaMano2 == 22 || CartaMano2 == 32)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 3 || CartaMano2 == 13 || CartaMano2 == 23 || CartaMano2 == 33)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 8 || CartaMano2 == 18 || CartaMano2 == 28 || CartaMano2 == 38)
+                {
+                    return CartaMano2;
+                }
+
+
+                if (CartaMano3 == 2 || CartaMano3 == 12 || CartaMano3 == 22 || CartaMano3 == 32)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 3 || CartaMano3 == 13 || CartaMano3 == 23 || CartaMano3 == 33)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 8 || CartaMano3 == 18 || CartaMano3 == 28 || CartaMano3 == 38)
+                {
+                    return CartaMano3;
+                }
+
+
+
+            }
+
+            if (numeroCartaMedio == 2 || numeroCartaMedio == 12 || numeroCartaMedio == 22 || numeroCartaMedio == 32)
+            {
+                if (CartaMano1 == 1 || CartaMano1 == 11 || CartaMano1 == 21 || CartaMano1 == 31)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 2 || CartaMano1 == 12 || CartaMano1 == 22 || CartaMano1 == 32)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 3 || CartaMano1 == 13 || CartaMano1 == 23 || CartaMano1 == 33)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 4 || CartaMano1 == 14 || CartaMano1 == 24 || CartaMano1 == 34)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 5 || CartaMano1 == 15 || CartaMano1 == 25 || CartaMano1 == 35)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 6 || CartaMano1 == 16 || CartaMano1 == 26 || CartaMano1 == 36)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 7 || CartaMano1 == 17 || CartaMano1 == 27 || CartaMano1 == 37)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 8 || CartaMano1 == 18 || CartaMano1 == 28 || CartaMano1 == 38)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 9 || CartaMano1 == 19 || CartaMano1 == 29 || CartaMano1 == 39)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 10 || CartaMano1 == 20 || CartaMano1 == 30 || CartaMano1 == 40)
+                {
+                    return CartaMano1;
+                }
+
+
+                if (CartaMano2 == 1 || CartaMano2 == 11 || CartaMano2 == 21 || CartaMano2 == 31)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 2 || CartaMano2 == 12 || CartaMano2 == 22 || CartaMano2 == 32)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 3 || CartaMano2 == 13 || CartaMano2 == 23 || CartaMano2 == 33)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 4 || CartaMano2 == 14 || CartaMano2 == 24 || CartaMano2 == 34)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 5 || CartaMano2 == 15 || CartaMano2 == 25 || CartaMano2 == 35)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 6 || CartaMano2 == 16 || CartaMano2 == 26 || CartaMano2 == 36)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 7 || CartaMano2 == 17 || CartaMano2 == 27 || CartaMano2 == 37)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 8 || CartaMano2 == 18 || CartaMano2 == 28 || CartaMano2 == 38)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 9 || CartaMano2 == 19 || CartaMano2 == 29 || CartaMano2 == 39)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 10 || CartaMano2 == 20 || CartaMano2 == 30 || CartaMano2 == 40)
+                {
+                    return CartaMano2;
+                }
+
+                if (CartaMano3 == 1 || CartaMano3 == 11 || CartaMano3 == 21 || CartaMano3 == 31)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 2 || CartaMano3 == 12 || CartaMano3 == 22 || CartaMano3 == 32)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 3 || CartaMano3 == 13 || CartaMano3 == 23 || CartaMano3 == 33)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 4 || CartaMano3 == 14 || CartaMano3 == 24 || CartaMano3 == 34)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 5 || CartaMano3 == 15 || CartaMano3 == 25 || CartaMano3 == 35)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 6 || CartaMano3 == 16 || CartaMano3 == 26 || CartaMano3 == 36)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 7 || CartaMano3 == 17 || CartaMano3 == 27 || CartaMano3 == 37)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 8 || CartaMano3 == 18 || CartaMano3 == 28 || CartaMano3 == 38)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 9 || CartaMano3 == 19 || CartaMano3 == 29 || CartaMano3 == 39)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 10 || CartaMano3 == 20 || CartaMano3 == 30 || CartaMano3 == 40)
+                {
+                    return CartaMano3;
+                }
+
+
+            }
+            if (numeroCartaMedio == 3 || numeroCartaMedio == 13 || numeroCartaMedio == 23 || numeroCartaMedio == 33)
+            {
+                if (CartaMano1 == 3 || CartaMano1 == 13 || CartaMano1 == 23 || CartaMano1 == 33)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano2 == 3 || CartaMano2 == 13 || CartaMano2 == 23 || CartaMano2 == 33)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano3 == 3 || CartaMano3 == 13 || CartaMano3 == 23 || CartaMano3 == 33)
+                {
+                    return CartaMano3;
+                }
+            }
+            if (numeroCartaMedio == 4 || numeroCartaMedio == 14 || numeroCartaMedio == 24 || numeroCartaMedio == 34)
+            {
+                if (CartaMano1 == 1 || CartaMano1 == 11 || CartaMano1 == 21 || CartaMano1 == 31)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 2 || CartaMano1 == 12 || CartaMano1 == 22 || CartaMano1 == 32)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 3 || CartaMano1 == 13 || CartaMano1 == 23 || CartaMano1 == 33)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 4 || CartaMano1 == 14 || CartaMano1 == 24 || CartaMano1 == 34)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 5 || CartaMano1 == 15 || CartaMano1 == 25 || CartaMano1 == 35)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 6 || CartaMano1 == 16 || CartaMano1 == 26 || CartaMano1 == 36)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 7 || CartaMano1 == 17 || CartaMano1 == 27 || CartaMano1 == 37)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 8 || CartaMano1 == 18 || CartaMano1 == 28 || CartaMano1 == 38)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 9 || CartaMano1 == 19 || CartaMano1 == 29 || CartaMano1 == 39)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 10 || CartaMano1 == 20 || CartaMano1 == 30 || CartaMano1 == 40)
+                {
+                    return CartaMano1;
+                }
+
+
+                if (CartaMano2 == 1 || CartaMano2 == 11 || CartaMano2 == 21 || CartaMano2 == 31)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 2 || CartaMano2 == 12 || CartaMano2 == 22 || CartaMano2 == 32)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 3 || CartaMano2 == 13 || CartaMano2 == 23 || CartaMano2 == 33)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 4 || CartaMano2 == 14 || CartaMano2 == 24 || CartaMano2 == 34)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 5 || CartaMano2 == 15 || CartaMano2 == 25 || CartaMano2 == 35)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 6 || CartaMano2 == 16 || CartaMano2 == 26 || CartaMano2 == 36)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 7 || CartaMano2 == 17 || CartaMano2 == 27 || CartaMano2 == 37)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 8 || CartaMano2 == 18 || CartaMano2 == 28 || CartaMano2 == 38)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 9 || CartaMano2 == 19 || CartaMano2 == 29 || CartaMano2 == 39)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 10 || CartaMano2 == 20 || CartaMano2 == 30 || CartaMano2 == 40)
+                {
+                    return CartaMano2;
+                }
+
+                if (CartaMano3 == 1 || CartaMano3 == 11 || CartaMano3 == 21 || CartaMano3 == 31)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 2 || CartaMano3 == 12 || CartaMano3 == 22 || CartaMano3 == 32)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 3 || CartaMano3 == 13 || CartaMano3 == 23 || CartaMano3 == 33)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 4 || CartaMano3 == 14 || CartaMano3 == 24 || CartaMano3 == 34)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 5 || CartaMano3 == 15 || CartaMano3 == 25 || CartaMano3 == 35)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 6 || CartaMano3 == 16 || CartaMano3 == 26 || CartaMano3 == 36)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 7 || CartaMano3 == 17 || CartaMano3 == 27 || CartaMano3 == 37)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 8 || CartaMano3 == 18 || CartaMano3 == 28 || CartaMano3 == 38)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 9 || CartaMano3 == 19 || CartaMano3 == 29 || CartaMano3 == 39)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 10 || CartaMano3 == 20 || CartaMano3 == 30 || CartaMano3 == 40)
+                {
+                    return CartaMano3;
+                }
+
+
+            }
+            if (numeroCartaMedio == 5 || numeroCartaMedio == 15 || numeroCartaMedio == 25 || numeroCartaMedio == 35)
+            {
+                if (CartaMano1 == 1 || CartaMano1 == 11 || CartaMano1 == 21 || CartaMano1 == 31)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 2 || CartaMano1 == 12 || CartaMano1 == 22 || CartaMano1 == 32)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 3 || CartaMano1 == 13 || CartaMano1 == 23 || CartaMano1 == 33)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 5 || CartaMano1 == 15 || CartaMano1 == 25 || CartaMano1 == 35)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 6 || CartaMano1 == 16 || CartaMano1 == 26 || CartaMano1 == 36)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 7 || CartaMano1 == 17 || CartaMano1 == 27 || CartaMano1 == 37)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 8 || CartaMano1 == 18 || CartaMano1 == 28 || CartaMano1 == 38)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 9 || CartaMano1 == 19 || CartaMano1 == 29 || CartaMano1 == 39)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 10 || CartaMano1 == 20 || CartaMano1 == 30 || CartaMano1 == 40)
+                {
+                    return CartaMano1;
+                }
+
+
+                if (CartaMano2 == 1 || CartaMano2 == 11 || CartaMano2 == 21 || CartaMano2 == 31)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 2 || CartaMano2 == 12 || CartaMano2 == 22 || CartaMano2 == 32)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 3 || CartaMano2 == 13 || CartaMano2 == 23 || CartaMano2 == 33)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 5 || CartaMano2 == 15 || CartaMano2 == 25 || CartaMano2 == 35)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 6 || CartaMano2 == 16 || CartaMano2 == 26 || CartaMano2 == 36)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 7 || CartaMano2 == 17 || CartaMano2 == 27 || CartaMano2 == 37)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 8 || CartaMano2 == 18 || CartaMano2 == 28 || CartaMano2 == 38)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 9 || CartaMano2 == 19 || CartaMano2 == 29 || CartaMano2 == 39)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 10 || CartaMano2 == 20 || CartaMano2 == 30 || CartaMano2 == 40)
+                {
+                    return CartaMano2;
+                }
+
+                if (CartaMano3 == 1 || CartaMano3 == 11 || CartaMano3 == 21 || CartaMano3 == 31)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 2 || CartaMano3 == 12 || CartaMano3 == 22 || CartaMano3 == 32)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 3 || CartaMano3 == 13 || CartaMano3 == 23 || CartaMano3 == 33)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 5 || CartaMano3 == 15 || CartaMano3 == 25 || CartaMano3 == 35)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 6 || CartaMano3 == 16 || CartaMano3 == 26 || CartaMano3 == 36)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 7 || CartaMano3 == 17 || CartaMano3 == 27 || CartaMano3 == 37)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 8 || CartaMano3 == 18 || CartaMano3 == 28 || CartaMano3 == 38)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 9 || CartaMano3 == 19 || CartaMano3 == 29 || CartaMano3 == 39)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 10 || CartaMano3 == 20 || CartaMano3 == 30 || CartaMano3 == 40)
+                {
+                    return CartaMano3;
+                }
+
+
+            }
+            if (numeroCartaMedio == 6 || numeroCartaMedio == 16 || numeroCartaMedio == 26 || numeroCartaMedio == 36)
+            {
+                if (CartaMano1 == 1 || CartaMano1 == 11 || CartaMano1 == 21 || CartaMano1 == 31)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 2 || CartaMano1 == 12 || CartaMano1 == 22 || CartaMano1 == 32)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 3 || CartaMano1 == 13 || CartaMano1 == 23 || CartaMano1 == 33)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 6 || CartaMano1 == 16 || CartaMano1 == 26 || CartaMano1 == 36)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 7 || CartaMano1 == 17 || CartaMano1 == 27 || CartaMano1 == 37)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 8 || CartaMano1 == 18 || CartaMano1 == 28 || CartaMano1 == 38)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 9 || CartaMano1 == 19 || CartaMano1 == 29 || CartaMano1 == 39)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 10 || CartaMano1 == 20 || CartaMano1 == 30 || CartaMano1 == 40)
+                {
+                    return CartaMano1;
+                }
+
+
+                if (CartaMano2 == 1 || CartaMano2 == 11 || CartaMano2 == 21 || CartaMano2 == 31)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 2 || CartaMano2 == 12 || CartaMano2 == 22 || CartaMano2 == 32)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 3 || CartaMano2 == 13 || CartaMano2 == 23 || CartaMano2 == 33)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 6 || CartaMano2 == 16 || CartaMano2 == 26 || CartaMano2 == 36)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 7 || CartaMano2 == 17 || CartaMano2 == 27 || CartaMano2 == 37)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 8 || CartaMano2 == 18 || CartaMano2 == 28 || CartaMano2 == 38)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 9 || CartaMano2 == 19 || CartaMano2 == 29 || CartaMano2 == 39)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 10 || CartaMano2 == 20 || CartaMano2 == 30 || CartaMano2 == 40)
+                {
+                    return CartaMano2;
+                }
+
+                if (CartaMano3 == 1 || CartaMano3 == 11 || CartaMano3 == 21 || CartaMano3 == 31)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 2 || CartaMano3 == 12 || CartaMano3 == 22 || CartaMano3 == 32)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 3 || CartaMano3 == 13 || CartaMano3 == 23 || CartaMano3 == 33)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 6 || CartaMano3 == 16 || CartaMano3 == 26 || CartaMano3 == 36)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 7 || CartaMano3 == 17 || CartaMano3 == 27 || CartaMano3 == 37)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 8 || CartaMano3 == 18 || CartaMano3 == 28 || CartaMano3 == 38)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 9 || CartaMano3 == 19 || CartaMano3 == 29 || CartaMano3 == 39)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 10 || CartaMano3 == 20 || CartaMano3 == 30 || CartaMano3 == 40)
+                {
+                    return CartaMano3;
+                }
+
+
+            }
+            if (numeroCartaMedio == 7 || numeroCartaMedio == 17 || numeroCartaMedio == 27 || numeroCartaMedio == 37)
+            {
+                if (CartaMano1 == 2 || CartaMano1 == 12 || CartaMano1 == 22 || CartaMano1 == 32)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 3 || CartaMano1 == 13 || CartaMano1 == 23 || CartaMano1 == 33)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 4 || CartaMano1 == 14 || CartaMano1 == 24 || CartaMano1 == 34)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 5 || CartaMano1 == 15 || CartaMano1 == 25 || CartaMano1 == 35)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 6 || CartaMano1 == 16 || CartaMano1 == 26 || CartaMano1 == 36)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 7 || CartaMano1 == 17 || CartaMano1 == 27 || CartaMano1 == 37)
+                {
+                    return CartaMano1;
+                }
+
+                if (CartaMano2 == 2 || CartaMano2 == 12 || CartaMano2 == 22 || CartaMano2 == 32)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 3 || CartaMano2 == 13 || CartaMano2 == 23 || CartaMano2 == 33)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 4 || CartaMano2 == 14 || CartaMano2 == 24 || CartaMano2 == 34)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 5 || CartaMano2 == 15 || CartaMano2 == 25 || CartaMano2 == 35)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 6 || CartaMano2 == 16 || CartaMano2 == 26 || CartaMano2 == 36)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 7 || CartaMano2 == 17 || CartaMano2 == 27 || CartaMano2 == 37)
+                {
+                    return CartaMano2;
+                }
+
+                if (CartaMano3 == 2 || CartaMano3 == 12 || CartaMano3 == 22 || CartaMano3 == 32)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 3 || CartaMano3 == 13 || CartaMano3 == 23 || CartaMano3 == 33)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 4 || CartaMano3 == 14 || CartaMano3 == 24 || CartaMano3 == 34)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 5 || CartaMano3 == 15 || CartaMano3 == 25 || CartaMano3 == 35)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 6 || CartaMano3 == 16 || CartaMano3 == 26 || CartaMano3 == 36)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 7 || CartaMano3 == 17 || CartaMano3 == 27 || CartaMano3 == 37)
+                {
+                    return CartaMano3;
+                }
+
+
+            }
+            if (numeroCartaMedio == 10 || numeroCartaMedio == 20 || numeroCartaMedio == 30 || numeroCartaMedio == 40)
+            {
+                if (CartaMano1 == 1 || CartaMano1 == 11 || CartaMano1 == 21 || CartaMano1 == 31)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 2 || CartaMano1 == 12 || CartaMano1 == 22 || CartaMano1 == 32)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 3 || CartaMano1 == 13 || CartaMano1 == 23 || CartaMano1 == 33)
+                {
+                    return CartaMano1;
+                }              
+                if (CartaMano1 == 8 || CartaMano1 == 18 || CartaMano1 == 28 || CartaMano1 == 38)
+                {
+                    return CartaMano1;
+                }
+                if (CartaMano1 == 10 || CartaMano1 == 20 || CartaMano1 == 30 || CartaMano1 == 40)
+                {
+                    return CartaMano1;
+                }
+
+                if (CartaMano2 == 1 || CartaMano2 == 11 || CartaMano2 == 21 || CartaMano2 == 31)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 2 || CartaMano2 == 12 || CartaMano2 == 22 || CartaMano2 == 32)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 3 || CartaMano2 == 13 || CartaMano2 == 23 || CartaMano2 == 33)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 8 || CartaMano2 == 18 || CartaMano2 == 28 || CartaMano2 == 38)
+                {
+                    return CartaMano2;
+                }
+                if (CartaMano2 == 10 || CartaMano2 == 20 || CartaMano2 == 30 || CartaMano2 == 40)
+                {
+                    return CartaMano2;
+                }
+
+                if (CartaMano3 == 1 || CartaMano3 == 11 || CartaMano3 == 21 || CartaMano3 == 31)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 2 || CartaMano3 == 12 || CartaMano3 == 22 || CartaMano3 == 32)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 3 || CartaMano3 == 13 || CartaMano3 == 23 || CartaMano3 == 33)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 8 || CartaMano3 == 18 || CartaMano3 == 28 || CartaMano3 == 38)
+                {
+                    return CartaMano3;
+                }
+                if (CartaMano3 == 10 || CartaMano3 == 20 || CartaMano3 == 30 || CartaMano3 == 40)
+                {
+                    return CartaMano3;
+                }
+
+
+            }
+
+
+       
+
+
         }
       
             return -1;       //Esta puesto por defecto en -1, me da error aqui necesito pasarle el nuermo de la carta selecionada en los if de arriba
@@ -603,8 +1311,8 @@ void Start()
 
         int cartaRecibida = C1(numeroCartaMedio, a, b, c);
 
-        
-
+        Debug.Log(cartaRecibida);
+     
 
         if (ObtenerTextoCarta(cartaRecibida) == aName)
         {
@@ -736,6 +1444,10 @@ void Start()
 
         if (turnoActual == 1)
         {
+            List<GameObject> ActivarClickJ1 = GetCartasJugador(turnoActual);
+            ActivarClickJ1[0].GetComponent<ClickDetector>().enabled = true;
+            ActivarClickJ1[1].GetComponent<ClickDetector>().enabled = true;
+            ActivarClickJ1[2].GetComponent<ClickDetector>().enabled = true;
             // Es el turno del jugador 1, espera a que seleccione una carta
             // y haga clic en ella en la función OnClickCarta()
 
@@ -745,6 +1457,7 @@ void Start()
             // Es el turno de un bot, selecciona una carta aleatoria
             List<Sprite> cartasJugadorActual = GetJugadorActual(turnoActual);
             List<GameObject> PoscartasJugadorActual = GetCartasJugador(turnoActual);
+
 
 
             //PensamientoBot(PoscartasJugadorActual);
@@ -766,6 +1479,7 @@ void Start()
             //cartaSeleccionada.GetComponent<ClickDetector>().OnMouseDown();
 
         }
+        DisableBotCardsClickDetection();
         //else if (turnoActual == 3)
         //{
 
