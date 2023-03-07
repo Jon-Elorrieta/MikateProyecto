@@ -13,7 +13,8 @@ public class DeckController : MonoBehaviour
     public List<GameObject> cardPrefabs4;
     public List<GameObject> cardMedio;
     public List<GameObject> deck;
-  
+
+    List<Sprite> cartasTragadas = new List<Sprite>();
 
     public List<ClickDetector> listaClickDetectors = new List<ClickDetector>();
    
@@ -45,36 +46,59 @@ public class DeckController : MonoBehaviour
 
     public List<int> listaNumerosCartas = new List<int>(); //lista de números de cartas
 
+  
 
-
-// Start is called before the first frame update
-void Start()
+    // Start is called before the first frame update
+    void Start()
     {
 
-        DisableBotCardsClickDetection();
+        
         RellenarCartasYJugadores();
         SelectCartasSobrantes();
       
         CapturarClick();
-
+        
 
 
     }
 
-    void DisableBotCardsClickDetection()
+    void RecogerCartasDelMedio(int TurnoActual)
     {
-        //No funciona , hay que corregir esto.
-        cardPrefabs[0].GetComponent<ClickDetector>().enabled = false;
-        cardPrefabs[1].GetComponent<ClickDetector>().enabled = false;
-        cardPrefabs[2].GetComponent<ClickDetector>().enabled = false;
+        // Agregar todas las cartas del medio a la lista temporal
+        foreach (Sprite carta in cartasMedio)
+        {
+            cartasTragadas.Add(carta);
+        }
 
-        cardPrefabs2[0].GetComponent<ClickDetector>().enabled = false;
-        cardPrefabs2[1].GetComponent<ClickDetector>().enabled = false;
-        cardPrefabs2[2].GetComponent<ClickDetector>().enabled = false;
+        // Limpiar la lista principal de cartas del medio
+        cartasMedio.Clear();
 
+        // Mover todas las cartas de la lista temporal a la lista principal del jugador/bot
+        foreach (Sprite carta in cartasTragadas)
+        {
+            // Aquí deberás reemplazar "listaDeCartasDelJugador" por la lista correspondiente
+
+            List<Sprite> JActual = GetJugadorActual(TurnoActual);
+            JActual.Add(carta);
+
+        }
+
+        // Limpiar la lista de cartas recogidas
+        cartasTragadas.Clear();
     }
+
+    //Luego, cuando el jugador o bot no tienen una carta para contrarrestar la carta del medio, puedes llamar
+    //a la función RecogerCartasDelMedio() para recoger todas las cartas del medio en la lista temporal,
+    //y luego moverlas a la lista principal del jugador/bot una vez que hayan sido recogidas.
+
+
+
+
+
+
         void CapturarClick()
     {
+        //J1
         foreach (GameObject carta in cardPrefabs)
         {
             ClickDetector clickDetector = carta.GetComponent<ClickDetector>();
@@ -87,10 +111,36 @@ void Start()
         {
             clickDetector.OnCartaClicked += OnCartaClicked;
         }
-
+        //J2
         foreach (GameObject carta2 in cardPrefabs2)
         {
             ClickDetector clickDetector = carta2.GetComponent<ClickDetector>();
+            if (clickDetector != null)
+            {
+                listaClickDetectors.Add(clickDetector);
+            }
+        }
+        foreach (ClickDetector clickDetector in listaClickDetectors)
+        {
+            clickDetector.OnCartaClicked += OnCartaClicked;
+        }
+        //J3
+        foreach (GameObject carta3 in cardPrefabs3)
+        {
+            ClickDetector clickDetector = carta3.GetComponent<ClickDetector>();
+            if (clickDetector != null)
+            {
+                listaClickDetectors.Add(clickDetector);
+            }
+        }
+        foreach (ClickDetector clickDetector in listaClickDetectors)
+        {
+            clickDetector.OnCartaClicked += OnCartaClicked;
+        }
+        //J4
+        foreach (GameObject carta4 in cardPrefabs4)
+        {
+            ClickDetector clickDetector = carta4.GetComponent<ClickDetector>();
             if (clickDetector != null)
             {
                 listaClickDetectors.Add(clickDetector);
@@ -120,8 +170,18 @@ void Start()
         cartasMedio.Add(SpriteCartaSelec);
         // Borrar la carta seleccionada de la mano del jugador
         jugador1.Remove(SpriteCartaSelec);
-         clickDetector.GetComponent<SpriteRenderer>().sprite = null;
-            }
+         //clickDetector.GetComponent<SpriteRenderer>().sprite = null;
+                if (cartasSobrantes.Count != 0)
+                {
+                    clickDetector.GetComponent<SpriteRenderer>().sprite = cartasSobrantes[cartasSobrantes.Count - 1];
+                    cartasSobrantes.Remove(clickDetector.GetComponent<SpriteRenderer>().sprite);
+                }
+                else
+                {
+                    //Si no hay cartas sobrantes, el sprite se pone a null.
+                    clickDetector.GetComponent<SpriteRenderer>().sprite = null;
+                }
+            }         
             AvanzarTurno();
         }
         if (jugador2.Contains(clickDetector.GetComponent<SpriteRenderer>().sprite))
@@ -134,8 +194,66 @@ void Start()
                 // Agregar la carta seleccionada a la lista de cartas del medio
                 cartasMedio.Add(SpriteCartaSelec);
                 // Borrar la carta seleccionada de la mano del jugador
-                jugador1.Remove(SpriteCartaSelec);
-                clickDetector.GetComponent<SpriteRenderer>().sprite = null;
+                jugador2.Remove(SpriteCartaSelec);
+                if (cartasSobrantes.Count != 0)
+                {
+                    clickDetector.GetComponent<SpriteRenderer>().sprite = cartasSobrantes[cartasSobrantes.Count - 1];
+                    cartasSobrantes.Remove(clickDetector.GetComponent<SpriteRenderer>().sprite);
+                }
+                else
+                {
+                    //Si no hay cartas sobrantes, el sprite se pone a null.
+                    clickDetector.GetComponent<SpriteRenderer>().sprite = null;
+                }
+            }
+            AvanzarTurno();
+        }
+        if (jugador3.Contains(clickDetector.GetComponent<SpriteRenderer>().sprite))
+        {
+            // Aquí puedes hacer lo que necesites con la carta que se hizo click
+            if (clickDetector != null)
+            {
+
+                // clickDetector.Invoke(gameObject);
+                // Agregar la carta seleccionada a la lista de cartas del medio
+                cartasMedio.Add(SpriteCartaSelec);
+                // Borrar la carta seleccionada de la mano del jugador
+                jugador3.Remove(SpriteCartaSelec);
+                if (cartasSobrantes.Count != 0)
+                {
+                    clickDetector.GetComponent<SpriteRenderer>().sprite = cartasSobrantes[cartasSobrantes.Count - 1];
+                    cartasSobrantes.Remove(clickDetector.GetComponent<SpriteRenderer>().sprite);
+                }
+                else
+                {
+                    //Si no hay cartas sobrantes, el sprite se pone a null.
+                    clickDetector.GetComponent<SpriteRenderer>().sprite = null;
+                }
+            }
+            AvanzarTurno();
+        }
+        if (jugador4.Contains(clickDetector.GetComponent<SpriteRenderer>().sprite))
+        {
+            // Aquí puedes hacer lo que necesites con la carta que se hizo click
+            if (clickDetector != null)
+            {
+
+                // clickDetector.Invoke(gameObject);
+                // Agregar la carta seleccionada a la lista de cartas del medio
+                cartasMedio.Add(SpriteCartaSelec);
+                // Borrar la carta seleccionada de la mano del jugador
+                jugador4.Remove(SpriteCartaSelec);
+                if (cartasSobrantes.Count != 0)
+                {
+                    clickDetector.GetComponent<SpriteRenderer>().sprite = cartasSobrantes[cartasSobrantes.Count - 1];
+                    cartasSobrantes.Remove(clickDetector.GetComponent<SpriteRenderer>().sprite);
+                }
+                else
+                {
+                    //Si no hay cartas sobrantes, el sprite se pone a null.
+                    clickDetector.GetComponent<SpriteRenderer>().sprite = null;
+                }
+
             }
             AvanzarTurno();
         }
@@ -152,6 +270,7 @@ void Start()
         {
             turnoActual = 1;
         }
+        Debug.Log("Turno Actual :" + turnoActual);
     }
     private List<Sprite> GetJugadorActual(int turnoActual) {
     switch (turnoActual) {
@@ -1310,6 +1429,11 @@ void Start()
         string cName = PoscartasJugadorActual[2].GetComponent<SpriteRenderer>().sprite.name;
 
         int cartaRecibida = C1(numeroCartaMedio, a, b, c);
+        //No hay cartas correctas para contrarestar la carta del medio, en este caso se tragan las cartas del medio..
+        //if (cartaRecibida == -1)
+        //{
+        //    RecogerCartasDelMedio(turnoActual);
+        //}
 
         Debug.Log(cartaRecibida);
      
@@ -1331,110 +1455,8 @@ void Start()
         {
             return null;
         }
-
-
-        
-       
-
-    //Tengo el numero de la carta recibida, necesito saber a que Sprite(Carta) que me estoy refiriendo para poder anadirlo a la list del medio
-
-
-    //if (numeroCartaMedio == 1)
-    //    {
-    //        //CartaMedio 1 = Carta Alta sin efectos
-           
-    //    }
-        //}else if (cartaMedio = 2){
-        //    //CartaMedio 2 = Se puede tirar a todo menos al 3, carta comodin
-
-
-
-        //}
-        //else if (cartaMedio = 3)
-        //{
-
-
-        //}
-        //else if (cartaMedio = 4)
-        //{
-
-
-        //}
-        //else if (cartaMedio = 5)
-        //{
-
-
-        //}
-        //else if (cartaMedio = 6)
-        //{
-
-
-        //}
-        //else if (cartaMedio = 7)
-        //{
-
-
-        //}
-        //else if (cartaMedio = 8)
-        //{
-
-
-        //}
-        //else if (cartaMedio = 9)
-        //{
-
-
-        //}
-        //else if (cartaMedio = 10)
-        //{
-
-
-        //}
     }
-    //public void PensamientoBot(List <GameObject> PoscartasJugadorActual)
-    //{
-    //    Sprite aEncontrado;
-    //    Sprite bEncontrado;
-    //    Sprite cEncontrado;
-    //    Sprite a = PoscartasJugadorActual[0].GetComponent<SpriteRenderer>().sprite;
-    //    Sprite b = PoscartasJugadorActual[1].GetComponent<SpriteRenderer>().sprite;
-    //    Sprite c = PoscartasJugadorActual[2].GetComponent<SpriteRenderer>().sprite;
-
-    //    if (a > cartasMedio[cartasMedio.Count - 1].name)
-    //    {
-    //        return a;
-    //    }else if (b > cartasMedio[cartasMedio.Count - 1].name)
-    //    {
-    //        return b;
-    //    }else if (a > cartasMedio[cartasMedio.Count - 1].name)
-    //    {
-    //        return c;
-    //    }
-
-    //    foreach (GameObject cartaEnMedio in cartasEnMedio)
-    //    {
-    //        // Calcular la similitud entre la carta del bot y la carta en el medio
-    //        float similitud = CalcularSimilitud(a, cartasMedio);
-
-    //        // Actualizar la mejor carta si esta tiene mayor similitud
-    //        if (similitud > mejorSimilitud)
-    //        {
-    //            mejorCarta = carta;
-    //            mejorSimilitud = similitud;
-    //        }
-    //    }
-
-
-
-    //}
-    //float CalcularSimilitud(GameObject carta1, GameObject carta2)
-    //{
-    //    int valor1 = carta1.GetComponent<Carta>().valor;
-    //    int valor2 = carta2.GetComponent<Carta>().valor;
-
-    //    return Mathf.Abs(valor1 - valor2);
-    //}
-
+ 
 
 
     // Update is called once per frame
@@ -1445,9 +1467,9 @@ void Start()
         if (turnoActual == 1)
         {
             List<GameObject> ActivarClickJ1 = GetCartasJugador(turnoActual);
-            ActivarClickJ1[0].GetComponent<ClickDetector>().enabled = true;
-            ActivarClickJ1[1].GetComponent<ClickDetector>().enabled = true;
-            ActivarClickJ1[2].GetComponent<ClickDetector>().enabled = true;
+            //ActivarClickJ1[0].GetComponent<ClickDetector>().enabled = true;
+            //ActivarClickJ1[1].GetComponent<ClickDetector>().enabled = true;
+            //ActivarClickJ1[2].GetComponent<ClickDetector>().enabled = true;
             // Es el turno del jugador 1, espera a que seleccione una carta
             // y haga clic en ella en la función OnClickCarta()
 
@@ -1479,15 +1501,61 @@ void Start()
             //cartaSeleccionada.GetComponent<ClickDetector>().OnMouseDown();
 
         }
-        DisableBotCardsClickDetection();
-        //else if (turnoActual == 3)
-        //{
+        else if (turnoActual == 3)
+        {
+            // Es el turno de un bot, selecciona una carta aleatoria
+            List<Sprite> cartasJugadorActual = GetJugadorActual(turnoActual);
+            List<GameObject> PoscartasJugadorActual = GetCartasJugador(turnoActual);
 
-        //}
-        //else if (turnoActual == 4)
-        //    {
 
-        //    }
+
+            //PensamientoBot(PoscartasJugadorActual);
+            GameObject cartaSeleccionada = LogicaJuego(PoscartasJugadorActual);
+            cartaSeleccionada.GetComponent<ClickDetector>().OnMouseDown();
+
+            //Si la carta del medio es un 4 ...
+            // if (cartasMedio[cartasMedio.Count - 1].name == "bastos4" | cartasMedio[cartasMedio.Count - 1].name == "oros4" | cartasMedio[cartasMedio.Count - 1].name == "copas4" | cartasMedio[cartasMedio.Count - 1].name == "espadas4")
+            //{
+
+            // //Debug.Log("Carta1: " + cartasJugadorActual[0].name + "Carta2: " + cartasJugadorActual[1].name + "Carta3: " + cartasJugadorActual[2].name);
+
+            // }
+
+
+            //De momento selecciona una carta random de las 3 que tiene en la mano y hace click encima de una para que entre en la funcion ClickDetector y ponga la carta en el medio
+            //int indiceCartaSeleccionada = Random.Range(0, 3);
+            //GameObject cartaSeleccionada = PoscartasJugadorActual[indiceCartaSeleccionada];
+            //cartaSeleccionada.GetComponent<ClickDetector>().OnMouseDown();
+
+        }
+        else if (turnoActual == 4)
+        {
+            // Es el turno de un bot, selecciona una carta aleatoria
+            List<Sprite> cartasJugadorActual = GetJugadorActual(turnoActual);
+            List<GameObject> PoscartasJugadorActual = GetCartasJugador(turnoActual);
+
+
+
+            //PensamientoBot(PoscartasJugadorActual);
+            GameObject cartaSeleccionada = LogicaJuego(PoscartasJugadorActual);
+            cartaSeleccionada.GetComponent<ClickDetector>().OnMouseDown();
+
+            //Si la carta del medio es un 4 ...
+            // if (cartasMedio[cartasMedio.Count - 1].name == "bastos4" | cartasMedio[cartasMedio.Count - 1].name == "oros4" | cartasMedio[cartasMedio.Count - 1].name == "copas4" | cartasMedio[cartasMedio.Count - 1].name == "espadas4")
+            //{
+
+            // //Debug.Log("Carta1: " + cartasJugadorActual[0].name + "Carta2: " + cartasJugadorActual[1].name + "Carta3: " + cartasJugadorActual[2].name);
+
+            // }
+
+
+            //De momento selecciona una carta random de las 3 que tiene en la mano y hace click encima de una para que entre en la funcion ClickDetector y ponga la carta en el medio
+            //int indiceCartaSeleccionada = Random.Range(0, 3);
+            //GameObject cartaSeleccionada = PoscartasJugadorActual[indiceCartaSeleccionada];
+            //cartaSeleccionada.GetComponent<ClickDetector>().OnMouseDown();
+
+        }
+    
 
     }
      
